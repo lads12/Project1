@@ -17,78 +17,81 @@
           }
         </style>
         <script>
-          function showItems()
+            var itemArray=["Sharpie","Mirror","Cell Phone","Candle","Flowers","Roast Beef"];
+            var priceArray=["$40","$10","$10,000","$1","$20","$150"];
+            var descriptionArray=["Buy","Buy","Buy","Buy","Buy","Buy"];
+            var picArray=["https://www.randomlists.com/img/things/sharpie.webp","https://www.randomlists.com/img/things/mirror.webp","https://www.randomlists.com/img/things/cell_phone.webp","https://www.randomlists.com/img/things/candle.webp","https://www.randomlists.com/img/things/flowers.webp","https://www.randomlists.com/img/things/beef.webp"];
+          function showArrays()
           {
-                var output = "<table>"
-                output+= "<tr> <th>Item<th> <th>Price</th>"
-                output+= "<tr> <td>Dog</td> <td>$200</td> </tr>"
-                output+= "<tr> <td>Cat</td> <td>150</td> </tr>"
-                output+= "</table>"
-                idTableItems.innerHTML = output
+              var output = "<table>";
+                output+="<tr> <th>Items<th> <th>Picture</th> <th>Price</th> <th>Description</th> </tr>"
+                for(var i = 0; i < itemArray.length; i++)
+                {
+                    
+                    output += itemArray[i] + " " + picArray[i] + " " + priceArray[i] + " " + descriptionArray[i] + "<br>";
+                }
+                output+="</table>"
+                idDivTable.innerHTML = output;
           }
-        
-            
+          function sortNameForward()
+          {
+            var arraySize = itemArray.length;
+            //If the given array has less than 2 elements, then it's already sorted!
+            if (arraySize < 2)
+            {
+                return;
+            }
 
+    //keep making passes through the array comparing/swapping adjacent elements.
+    //we do this until we are able to make a pass through the array without
+    //having to make any swaps - since that must mean that the array is sorted.
 
-         
+    //This variable tracks whether the current pass will be the last one
+    var sortDone;
 
-            
+    do
+    {
+        //Assume that the array is in sorted order, until we
+        //are proven wrong (i.e. we have to swap elements)
+        sortDone = true;
 
-            
+        for(var i = 0; i < arraySize-1; i++)
+        {
+            if(monthNumber[i] > monthNumber[i+1])
+            {
+                //The array was not in sorted order, so we must
+                //keep making passes through the array
+                sortDone = false;
+
+                //swap the two out-of-order elements
+                var temp = itemArray[i];
+                itemArray[i] = itemArray[i+1];
+                itemArray[i+1] = temp;
+                //swap corresponding AGES as well
+                var temp = priceArray[i];
+                priceArray[i] = priceArray[i+1];
+                priceArray[i+1] = temp;
+                 //swap corresponding elements
+                 var temp = avgTemp[i];
+                 avgTemp[i] = avgTemp[i+1];
+                 avgTemp[i+1] = temp;
+            }
+        }
+    }while(sortDone == false)
+    showArrays();
+          }     
         </script>
 
-        <body>
+        <body onLoad = "showArrays()">
+            <input type="button" value= "Name Forward" onClick= "sortNameForward()">
+            <input type="button" value= "Name Forward" onClick= "sortNameBackward()">
+            <input type="button" value= "Name Forward" onClick= "sortPriceForward()">
+            <input type="button" value= "Name Forward" onClick= "sortPriceBackward()">
             <center>
-            <span>Joshua George</span>
-           
-            
-
-            <button type="button" onclick="showArrays()" value="randomNum">Show Items</button>
+            <span>Joshua George and Eric Osborn</span>
             <br><br>
-            
-           <table id="idTableItems">
-                <tr>
-                    <th>Item</th>
-                    <th>Price</th>
-                </tr>
-                <tr>
-                    <th>Sharpie</th>
-                    <th>40$</th>
-                    <td><img src="https://www.randomlists.com/img/things/sharpie.webp" alt="" border=3 height=100 width=300></img></th>
-                </tr>
-                <tr>
-                    <th>Mirror</th>
-                    <th>10$</th>
-                    <td><img src="https://www.randomlists.com/img/things/mirror.webp" alt="" border=3 height=100 width=300></img></th>
-                </tr>
-                <tr>
-                    <th>Cell Phone</th>
-                    <th>10,000$</th>
-                    <td><img src="https://www.randomlists.com/img/things/cell_phone.webp" alt="" border=3 height=100 width=300></img></th>
-                </tr>
-                <tr>
-                    <th>Candle</th>
-                    <th>1$</th>
-                    <td><img src="https://www.randomlists.com/img/things/candle.webp" alt="" border=3 height=100 width=300></img></th>
-                </tr>
-                <tr>
-                    <th>Flowers</th>
-                    <th>20$</th>
-                    <td><img src="https://www.randomlists.com/img/things/flowers.webp" alt="" border=3 height=100 width=300></img></th>
-                </tr>
-                <tr>
-                    <th>Roast Beef</th>
-                    <th>150$</th>
-                    <td><img src="https://www.randomlists.com/img/things/beef.webp" alt="" border=3 height=100 width=300></img></th>
-                </tr>
-                
-            </table> 
-        
-                
-
-            
+            <div id = "idDivTable"></div>   
         </center>
         </body>
     </head>
 </html>
-
